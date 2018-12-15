@@ -1,24 +1,23 @@
 #include <iostream>
 //i is the head, l is the size of heap
 int parent(int i){
-	return i>>2;
+	return i>>1;
 }
 int leftchild(int i){
-	return (i<<2)+1;
+	return (i<<1)+1;
 }
 int rightchild(int i){
-	return (i<<2)+2;
+	return (i<<1)+2;
 }
 void max_heapify(int* A,int i,int l){
 	int lc=leftchild(i);
 	int rc=rightchild(i);
 	int temp=A[i];
 	int max=A[i];
-	std::cout<<"tmep"<<std::endl;
-	if(lc < l && temp<A[lc]){
+	if(lc < l && max<A[lc]){
 		max=A[lc];
 	}
-	if(rc < l && A[i]<A[rc]){
+	if(rc < l && max<A[rc]){
 		max=A[rc];
 	}
 	if(max==A[i]){
@@ -34,10 +33,20 @@ void max_heapify(int* A,int i,int l){
 		max_heapify(A,rc,l);
 	}
 }
+void build_maxheap(int* A,int l){
+	int middle=l>>1;
+	for(int i=middle;i>=0;i--){
+	for(size_t i=0;i<l;i++){
+		std::cout<<A[i]<<" ";
+	}
+	std::cout<<std::endl;
+		max_heapify(A,i,l);
+	}
+}
 int main(){
-	int A[14]={27,17,3,16,13,10,1,5,7,12,4,8,9,0};
-	max_heapify(A,3,14);
-	for(size_t i=0;i<14;i++){
+	int A[10]={4,1,3,2,16,9,10,14,8,7};
+	build_maxheap(A,10);
+	for(size_t i=0;i<10;i++){
 		std::cout<<A[i]<<std::endl;
 	}
 }
